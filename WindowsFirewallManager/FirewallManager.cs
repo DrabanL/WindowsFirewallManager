@@ -125,36 +125,44 @@ namespace RabanSoft.WindowsFirewallManager
         /// initiazlies <see cref="_rule"/> with a newly generated rule based on <paramref name="count"/> and adds it to <see cref="_rules"/>
         /// </summary>
         /// <param name="count"></param>
-        private void generateRule(int count) {
+        private void generateRule(int count)
+        {
             // unique rule based on the current count
             var ruleName = $"{_settings.RuleName}_{count}";
 
             // set the rule properties based on the provided settings
             var rule = FirewallHelper.Generate();
+            rule.Name = ruleName;
             rule.Enabled = true; // we assume the rule should be enabled by default
-            rule.InterfaceTypes = _settings.InterfaceTypes; 
+            rule.InterfaceTypes = _settings.InterfaceTypes;
             rule.Action = _settings.Action;
             rule.Direction = _settings.Direction;
-            rule.Description = _settings.RuleDescription;
-            rule.Name = ruleName;
             rule.Protocol = (int)_settings.Protocol;
-            rule.ApplicationName = _settings.ApplicationName;
-            rule.serviceName = _settings.ServiceName;
-            rule.IcmpTypesAndCodes = _settings.IcmpTypesAndCodes;
-            rule.Grouping = _settings.Grouping;
-            rule.EdgeTraversal = _settings.EdgeTraversal;
-            rule.Interfaces = _settings.Interfaces;
+            if (!string.IsNullOrWhiteSpace(_settings.RuleDescription))
+                rule.Description = _settings.RuleDescription;
+            if (!string.IsNullOrWhiteSpace(_settings.ApplicationName))
+                rule.ApplicationName = _settings.ApplicationName;
+            if (!string.IsNullOrWhiteSpace(_settings.ServiceName))
+                rule.serviceName = _settings.ServiceName;
+            if (!string.IsNullOrWhiteSpace(_settings.IcmpTypesAndCodes))
+                rule.IcmpTypesAndCodes = _settings.IcmpTypesAndCodes;
+            if (!string.IsNullOrWhiteSpace(_settings.Grouping))
+                rule.Grouping = _settings.Grouping;
+            if (_settings.EdgeTraversal != null)
+                rule.EdgeTraversal = (bool)_settings.EdgeTraversal;
+            if (_settings.Interfaces != null)
+                rule.Interfaces = _settings.Interfaces;
 
             if (_settings.IsApplyToRemoteAddresses)
                 // we do not want to apply to any address at first
                 rule.RemoteAddresses = "255.255.255.255-255.255.255.255";
-            
+
             if (_settings.IsApplyToLocalAddresses)
                 // we do not want to apply to any address at first
                 rule.LocalAddresses = "255.255.255.255-255.255.255.255";
-            
+
             // specific remote ports can be set only if the protocol is specifically TCP or UDP
-            if (_settings.Protocol != NetFwIPProtocols.Any && 
+            if (_settings.Protocol != NetFwIPProtocols.Any &&
                 (!string.IsNullOrWhiteSpace(_settings.RemotePorts) || !string.IsNullOrWhiteSpace(_settings.LocalPorts)))
             {
                 rule.RemotePorts = _settings.RemotePorts;

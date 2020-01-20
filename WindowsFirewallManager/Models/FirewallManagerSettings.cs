@@ -20,12 +20,12 @@ namespace RabanSoft.WindowsFirewallManager.Models
         /// </summary>
         public NetFwIPProtocols Protocol { get; set; } = NetFwIPProtocols.Any;
         public string ServiceName { get; set; }
-        public dynamic Interfaces { get; set; }
+        public dynamic Interfaces { get; set; } = null;
         /// <summary>
         /// The action that the firewall manager rules' will be set to enforce. <see cref="NET_FW_ACTION_.NET_FW_ACTION_BLOCK"/> by default.
         /// </summary>
         public NET_FW_ACTION_ Action { get; set; } = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
-        public bool EdgeTraversal { get; set; }
+        public bool? EdgeTraversal { get; set; } = null;
         public string Grouping { get; set; }
         /// <summary>
         /// The direction that the firewall manager rules' will be set to. <see cref="NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_IN"/> by default.
