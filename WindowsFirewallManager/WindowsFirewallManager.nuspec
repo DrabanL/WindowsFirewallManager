@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>RabanSoft.WindowsFirewallManager</id>
+    <version>1.0.0</version>
+    <authors>Daniel Raban</authors>
+    <owners>Daniel Raban</owners>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/DrabanL/WindowsFirewallManager</projectUrl>
+    <description>A library that simpifies management of Windows Firewall</description>
+    <copyright>RabanSoft. 2020</copyright>
+    <tags>Firewall Windows Manager</tags>
+  </metadata>
+    <files>
+    <file src="bin\Debug\RabanSoft.WindowsFirewallManager.dll" target="lib\net40" />
+    <file src="bin\Debug\RabanSoft.WindowsFirewallManager.pdb" target="lib\net40" />
+  </files>
+</package>

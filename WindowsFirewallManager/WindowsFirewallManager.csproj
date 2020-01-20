@@ -55,5 +55,8 @@
   <ItemGroup>
     <Content Include="Resources\Interop.NetFwTypeLib.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="WindowsFirewallManager.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
