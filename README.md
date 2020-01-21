@@ -32,7 +32,7 @@ _firewallRef.Remove("54.66.122.1");
 
 ...
 
-_firewallBlock.Clear();
+_firewallRef.Clear();
 ```
 
 ## Nuget package
